@@ -52,16 +52,16 @@ public class UISteps {
         elementConfigurations.clickDateFiltersBtn();
     }
 
-    @И("^ввели в поле \"Подача заявок с,по\" текущую дату$")
-    public void inputCurrentDateInPeriodFrom() {
+    //Записывать даты в формате dd-MM-yyyy, сегодняшний день функция ElementConfigurations getNowDate
+    @И("^ввели в поле \"Подача заявок с,по\" текущую дату Дата с \"([^\"]*)\" по \"([^\"]*)\"$")
+    public void inputCurrentDateInPeriodFrom(String dateFrom,String dateBefore) {
         ElementConfigurations elementConfigurations = new ElementConfigurations();
         elementConfigurations.clickDateInPeriodFrom();
         elementConfigurations.hideModalWindow();
-        elementConfigurations.inputDateInPeriodFrom(elementConfigurations.getNowDate());
+        elementConfigurations.inputDateInPeriodFrom(dateFrom);
         elementConfigurations.clickDateInPeriodBefore();
         elementConfigurations.hideModalWindow();
-//        elementConfigurations.inputDateInPeriodBefore(elementConfigurations.getNowDate());
-        elementConfigurations.inputDateInPeriodBefore("09-03-2022");
+        elementConfigurations.inputDateInPeriodBefore(dateBefore);
     }
 
     @И("^нажали Регион поставки$")

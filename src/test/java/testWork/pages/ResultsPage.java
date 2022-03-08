@@ -37,10 +37,6 @@ public class ResultsPage extends BasePage {
 
                 collectDataAndWriterInFile((c - 2) * 10);
 
-                if (c == countPages + 1) {
-                    continue;
-                }
-
                 $(By.xpath("//a[@href='?page=" + c + "' and text()='" + c + "']")).shouldHave(Condition.exist).click();
 
             }
