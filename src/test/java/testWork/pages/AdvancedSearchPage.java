@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class AdvancedSearchPage {
+public class AdvancedSearchPage extends BasePage {
 
     protected Logger logger = LogManager.getLogger(AdvancedSearchPage.class.getName());
 

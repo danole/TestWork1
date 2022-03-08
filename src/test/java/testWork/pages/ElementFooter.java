@@ -7,13 +7,13 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class ElementFooter {
+public class ElementFooter extends BasePage {
 
     protected Logger logger = LogManager.getLogger(ElementFooter.class.getName());
 
-    private String forSuppliers="//a[@href='/zakupki-223/participants-223']";
+    private String forSuppliers = "//a[@href='/zakupki-223/participants-223']";
 
-    public void goToSectionSuppliers(){
+    public void goToSectionSuppliers() {
         $(By.xpath(forSuppliers)).shouldBe(Condition.exist).click();
         logger.info("Перешли на страницу Поставщикам");
     }

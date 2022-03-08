@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class SuppliersPage {
+public class SuppliersPage extends BasePage {
 
     protected Logger logger = LogManager.getLogger(SuppliersPage.class.getName());
 

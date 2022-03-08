@@ -11,7 +11,7 @@ import java.util.Date;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
-public class ElementConfigurations {
+public class ElementConfigurations extends BasePage {
 
     protected Logger logger = LogManager.getLogger(ElementConfigurations.class.getName());
 
