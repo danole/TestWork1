@@ -15,6 +15,6 @@ public class SuppliersPage extends BasePage {
 
     public void goToSectionAdvancedSearch() {
         $(By.xpath(advancedSearchBtn)).shouldBe(Condition.exist).click();
-        logger.info("Перешли на страницу Расширенный поиск");
+//        logger.info("Перешли на страницу Расширенный поиск");
     }
 }

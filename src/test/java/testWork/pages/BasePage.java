@@ -14,10 +14,7 @@ public class BasePage {
 
     private String startingPrice = "//div[@itemprop='price']";
 
-    public void collectDataAndWriterInFile(int number) throws IOException {
-
-        File outFile = new File("output.txt");
-        FileWriter fileWriter = new FileWriter(outFile, false);
+    public void collectDataAndWriterInFile(int number,File outFile,FileWriter fileWriter,ElementsCollection cards) throws IOException {
 
         ElementsCollection hidden = $$(By.xpath("//span[@class='more-position show-more']"));
 
@@ -32,7 +29,7 @@ public class BasePage {
 
         for (int i = 1; i <= card.size(); i++) {
 
-            ElementsCollection cards = $$(By.xpath("//div[@class='cards'][" + i + "]/*[2]/*/*[7]//*[1]/*/*/*/*[3]"));
+            cards = $$(By.xpath("//div[@class='cards'][" + i + "]/*[2]/*/*[7]//*[1]/*/*/*/*[3]"));
 
             System.out.println("Карточка " + (i + number) + " : ");
             fileWriter.write("Карточка " + (i + number) + " : \n");
@@ -46,6 +43,7 @@ public class BasePage {
                 fileWriter.write(cards.get(j).getText() + "\n");
                 System.out.println(cards.get(j).getText());
             }
+
 
         }
     }

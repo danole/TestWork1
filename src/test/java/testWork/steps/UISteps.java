@@ -13,6 +13,7 @@ public class UISteps {
     @И("^открыли сайт \"([^\"]*)\"$")
     public void openUrl(String url) {
         Configuration.browserSize = "1920x1080";
+        Configuration.timeout=15000;
         open(url);
     }
 
