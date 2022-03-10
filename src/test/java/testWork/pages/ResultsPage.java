@@ -1,7 +1,5 @@
 package testWork.pages;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -11,21 +9,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class ResultsPage extends BasePage {
 
     protected Logger logger = LogManager.getLogger(ResultsPage.class.getName());
 
-    private String card = "//div[@class='cards'][1]/*[2]/*/*[7]//*[1]/*/*/*/*[3]";
-    private String startingPrice = "//div[@itemprop='price']";
-    private String numberOfUnits = "//div[@class='card-item']/*[7]/*[1]/*/*/*/*[3]";
-    private String showMore = "//span[@class='more-position show-more']";
     private String countCards = "//span[@id='Notifications']/*/*[1]";
+    private String loader = "//div[@class='loader']";
 
-    public void collectAllData() throws IOException, InterruptedException {
+    public void collectAllData() throws IOException {
+
+        $(By.xpath(loader)).should(disappear, Duration.ofSeconds(15));
 
         int parseCount = Integer.parseInt($(By.xpath(countCards)).shouldBe(visible, Duration.ofSeconds(15)).getText());
         double parseCountDouble = ((double) parseCount) / 10;
@@ -35,31 +32,27 @@ public class ResultsPage extends BasePage {
         File outFile = new File("output.txt");
         FileWriter fileWriter = new FileWriter(outFile, false);
 
+        deleteModalWindow();
 
         if (countPages > 1) {
             for (int c = 2; c <= countPages; c++) {
-
-                collectDataAndWriterInFile(((c-2)*10),fileWriter);
-
+                collectDataAndWriterInFile(((c - 2) * 10), fileWriter);
                 $(By.xpath("//a[@class='page-link next']")).shouldBe(exist).click();
-                Thread.sleep(5000);
-
+                $(By.xpath(loader)).should(disappear, Duration.ofSeconds(15));
             }
 
-            Thread.sleep(5000);
-            collectDataAndWriterInFile((countPages-1) * 10, fileWriter);
+            $(By.xpath(loader)).should(disappear, Duration.ofSeconds(15));
+            collectDataAndWriterInFile((countPages - 1) * 10, fileWriter);
 
-        } else {
-
+        } else if (countPages == 1) {
             collectDataAndWriterInFile(0, fileWriter);
-
+        } else {
+            logger.error("Результатов поиска нет!");
         }
 
-
         fileWriter.close();
-
+        logger.info("Записали данные в файл output.txt");
 
     }
-
 
 }

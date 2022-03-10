@@ -53,16 +53,15 @@ public class UISteps {
         elementConfigurations.clickDateFiltersBtn();
     }
 
-    //Записывать даты в формате dd-MM-yyyy, сегодняшний день функция ElementConfigurations getNowDate
-    @И("^ввели в поле \"Подача заявок с,по\" текущую дату Дата с \"([^\"]*)\" по \"([^\"]*)\"$")
-    public void inputCurrentDateInPeriodFrom(String dateFrom,String dateBefore) {
+    @И("^ввели в поле \"Подача заявок с,по\" текущую дату$")
+    public void inputCurrentDateInPeriodFrom() {
         ElementConfigurations elementConfigurations = new ElementConfigurations();
         elementConfigurations.clickDateInPeriodFrom();
         elementConfigurations.hideModalWindow();
-        elementConfigurations.inputDateInPeriodFrom(dateFrom);
+        elementConfigurations.inputDateInPeriodFrom(elementConfigurations.getNowDate());
         elementConfigurations.clickDateInPeriodBefore();
         elementConfigurations.hideModalWindow();
-        elementConfigurations.inputDateInPeriodBefore(dateBefore);
+        elementConfigurations.inputDateInPeriodBefore(elementConfigurations.getNowDate());
     }
 
     @И("^нажали Регион поставки$")
@@ -85,9 +84,8 @@ public class UISteps {
     }
 
     @И("^собираем начальная цена и количество закупок на всех карточках и записываем в файл$")
-    public void collectAllStartingPriceAndNumber() throws InterruptedException, IOException {
+    public void collectAllStartingPriceAndNumber() throws IOException {
         ResultsPage resultsPage = new ResultsPage();
-        Thread.sleep(1000);
         resultsPage.collectAllData();
 
     }

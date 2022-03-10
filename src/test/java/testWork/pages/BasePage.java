@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class BasePage {
 
@@ -30,17 +31,24 @@ public class BasePage {
 
             ElementsCollection cards = $$(By.xpath("//div[@class='cards'][" + i + "]/*[2]/*/*[7]//*[1]/*/*/*/*[3]"));
 
-            System.out.println("Карточка " + (i + number) + " : ");
             fileWriter.write("Карточка " + (i + number) + " : \n");
-            System.out.println("Начальная цена : " + price.get(i - 1).getText());
             fileWriter.write("Начальная цена : " + price.get(i - 1).getText() + "\n");
 
             for (int j = 0; j < cards.size(); j++) {
                 fileWriter.write(cards.get(j).getText() + "\n");
-                System.out.println(cards.get(j).getText());
             }
 
         }
 
     }
+
+    public void deleteModalWindow(){
+
+        executeJavaScript("document.getElementsByTagName('body')[0]" +
+                ".removeChild(document.getElementsByClassName('modal-wrap consultation_modal')[0]);" +
+                "document.getElementsByTagName('body')[0]" +
+                ".removeChild(document.getElementsByClassName('modal-overlap modal-overlap--animation')[0]);");
+
+    }
+
 }

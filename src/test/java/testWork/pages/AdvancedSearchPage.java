@@ -17,5 +17,4 @@ public class AdvancedSearchPage extends BasePage {
         $(By.xpath(configurationsBtn)).shouldBe(Condition.exist).click();
         logger.info("Перешли на страницу Настройки");
     }
-
 }
